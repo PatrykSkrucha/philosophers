@@ -41,6 +41,6 @@ fclean: clean
 re: fclean all
 
 run:
-	make && ./philo $(arg)
+	make && ./philo $(args)
 
 .PHONY: all clean fclean re
