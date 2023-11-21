@@ -10,9 +10,17 @@
 
 typedef struct timeval	t_timeval;
 
+typedef enum e_status
+{
+	ALIVE,
+	DEAD,
+	FULLY_ATE
+}	t_status;
+
 typedef struct s_philo
 {
-	pthread_t		*thread;
+	pthread_t		thread;
+	t_status		status;
 	pthread_mutex_t r_fork;
 	pthread_mutex_t	*l_fork;
 	__uint32_t		id;
@@ -38,10 +46,14 @@ typedef struct s_main
 	bool		limited_dinner;
 }	t_main;
 
-void	*check_malloc(void *ptr);
-t_main	*arrange_main(char **argv);
-char    **ft_split(char *str, char c);
+void		*check_malloc(void *ptr);
+t_main		*arrange_main(char **argv);
+char    	**ft_split(char *str, char c);
 __uint32_t	ft_atoui32(char *str);
-int	ft_strlen(char	*str);
+int			ft_strlen(char	*str);
+void		start_the_party(t_main *main);
+void		stop_the_party(t_main *main);
+void		error_exit(char *message);
+void		free_main(t_main *main);
 
 #endif

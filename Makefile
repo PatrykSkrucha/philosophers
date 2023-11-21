@@ -8,7 +8,7 @@ SOURCES := $(SRC_DIR)/*.c
 
 OBJECTS := $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(SOURCES:.c=.o))
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g -pthread
+CFLAGS := -Wall -Wextra -Werror -g -pthread -fsanitize=thread
 
 GREEN = \x1b[32;01m
 RED = \x1b[31;01m
