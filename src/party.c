@@ -4,28 +4,42 @@ void* routine(void *ptr)
 {
 	t_philo	*temp;
 
-	temp = (t_philo*)ptr;
-	if (temp->id % 2)
-		usleep(10);
-	if (temp->limited_dinner)
+	temp = ptr;
+	if (temp->id % 2 == 0)
+		print_message(temp, 2);
+	//if (temp->limited_dinner)
 	return (ptr);
 }
 
-void	start_the_party(t_main *main)
+//void*	monitoring(void *ptr)
+//{
+//	t_philo	*temp;
+
+//	temp = (t_philo*)ptr;
+
+//}
+
+void	start_simulation(t_main *main)
 {
 	__uint32_t	i;
+	//pthread_t	monitor;
 
 	i = 0;
-	gettimeofday(&main->time_start, NULL);
+	main->time_start = get_time();
 	while (i < main->num_of_philos)
 	{
+		printf("start at: %ld\n", get_time() - main->time_start);
 		if (pthread_create(&main->philos[i]->thread, NULL, &routine, main->philos[i]) != 0)
 			error_exit("Failed to create thread\n");
 		i++;
 	}
+	//if (pthread_create(&monitor, NULL, &monitoring, main->philos) != 0)
+	//	thread_error();
+	//if (pthread_join(monitor, NULL) != 0)
+	//	thread_error();
 }
 
-void stop_the_party(t_main *main)
+void stop_simulation(t_main *main)
 {
 	__uint32_t	i;
 
@@ -41,5 +55,5 @@ void stop_the_party(t_main *main)
 		pthread_mutex_destroy(&main->philos[i]->r_fork);
 		i++;
 	}
-	printf("after party\n");
+
 }

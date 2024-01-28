@@ -10,9 +10,9 @@ int main(int argc, char **argv)
 		exit (1);
 	}
 	main = arrange_main(++argv);
-	start_the_party(main);
+	start_simulation(main);
 	//exit(1);
-	stop_the_party(main);
+	stop_simulation(main);
 	free_main(main);
 	return (0);
 }
