@@ -1,20 +1,8 @@
 #include "../include/philo.h"
 
-int	ft_strlen(char	*str)
+int	word_counter(char *str, char c)
 {
 	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int word_counter(char *str, char c)
-{
-	int i;
 
 	i = 0;
 	while (str[i])
@@ -31,7 +19,7 @@ char	*ft_strdup(char *str)
 {
 	char	*new_str;
 	int		i;
-	
+
 	if (!str)
 		return (NULL);
 	new_str = malloc(ft_strlen(str) + 1);
@@ -44,13 +32,14 @@ char	*ft_strdup(char *str)
 		i++;
 	}
 	new_str[i] = '\0';
-	return (new_str);	
+	return (new_str);
 }
 
 char	*ft_substr(char *str, int start, int len)
 {
 	char	*new_str;
 	int		i;
+
 	if (str[0] == '\0' || start > ft_strlen(str) || len == 0)
 		return (ft_strdup(""));
 	i = ft_strlen(str + start);
@@ -83,10 +72,10 @@ int	temp_length(char *str, char c)
 	return (i);
 }
 
-char    **ft_split(char *str, char c)
+char	**ft_split(char *str, char c)
 {
-	char    **new_array;
-	char    *temp;
+	char	**new_array;
+	char	*temp;
 	int		i;
 	int		j;
 

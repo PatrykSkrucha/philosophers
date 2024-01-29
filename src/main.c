@@ -1,6 +1,6 @@
 #include "../include/philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_main	*main;
 
@@ -10,10 +10,13 @@ int main(int argc, char **argv)
 		exit (1);
 	}
 	main = arrange_main(++argv);
-	main->time_start = 0;
-	start_simulation(main);
-	//exit(1);
-	stop_simulation(main);
+	if (main->num_of_philos == 1)
+		solo_dinner(main);
+	else
+	{
+		start_simulation(main);
+		stop_simulation(main);
+	}
 	free_main(main);
 	return (0);
 }

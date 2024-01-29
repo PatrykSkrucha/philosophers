@@ -17,6 +17,15 @@ typedef enum e_status
 	FULLY_ATE
 }	t_status;
 
+typedef enum e_activity
+{
+	EAT,
+	SLEEP,
+	THINK,
+	FORK,
+	DEATH
+}	t_activity;
+
 typedef struct s_philo
 {
 	pthread_t		thread;
@@ -26,38 +35,49 @@ typedef struct s_philo
 	pthread_mutex_t	status_mutex;
 	pthread_mutex_t r_fork;
 	pthread_mutex_t	*l_fork;
-	__uint32_t		id;
-	__uint32_t		last_eat;
-	__uint32_t		time_to_die;
-	__uint32_t		time_to_eat;
-	__uint32_t		time_to_sleep;
-	__uint32_t		number_of_meals;
+	long			id;
+	long			last_eat;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			number_of_meals;
 	bool			limited_dinner;
 }	t_philo;
 
 typedef struct s_main
 {
-	t_philo		**philos;
+	t_philo			**philos;
 	long			time_start;
 	pthread_mutex_t	print;
-	__uint32_t		num_of_philos;
-	__uint32_t		time_to_die;
-	__uint32_t		time_to_eat;
-	__uint32_t		time_to_sleep;
-	__uint32_t		number_of_meals;
+	long			num_of_philos;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			number_of_meals;
 	bool			limited_dinner;
 }	t_main;
 
 void		*check_malloc(void *ptr);
 t_main		*arrange_main(char **argv);
 char    	**ft_split(char *str, char c);
-__uint32_t	ft_atoui32(char *str);
+long		ft_atoui32(char *str);
+t_status	get_status(t_philo *philo);
 int			ft_strlen(char	*str);
 void		start_simulation(t_main *main);
 void		stop_simulation(t_main *main);
 void		error_exit(char *message);
 void		free_main(t_main *main);
 long		get_time(void);
-void		print_message(t_philo *philo, int action);
+void		print_message(t_philo *philo, t_activity activity);
+void		eat(t_philo *philo);
+void		philo_sleep(t_philo *philo);
+void		think(t_philo *philo);
+void		ft_sleep(t_philo *philo, long value);
+void		update_meal_time(t_philo *philo);
+void		solo_dinner(t_main *main);
+void*		monitoring(void *ptr);
+void		get_input(t_main **main, char **argv);
+void		double_free(char **str);
+int			ft_strlen(char	*str);
 
 #endif
