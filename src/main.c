@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 		exit (1);
 	}
 	main = arrange_main(++argv);
+	main->time_start = 0;
 	start_simulation(main);
 	//exit(1);
 	stop_simulation(main);

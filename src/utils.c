@@ -119,7 +119,10 @@ void	hand_out_forks(t_main **main)
 		i++;
 	}
 	if (i == 0)
+	{
+		(*main)->philos[0]->l_fork = NULL;   //??
 		return ;
+	}
 	(*main)->philos[i]->l_fork = &(*main)->philos[0]->r_fork;
 }
 
