@@ -2,11 +2,11 @@
 
 void	*routine(void *ptr)
 {
-	//t_philo	*temp;
+	t_philo	*temp;
 
-	//temp = ptr;
-	//if (temp->id % 2 == 0)
-		//print_message(temp, 2);
+	temp = ptr;
+	if (temp->id % 2 == 0)
+		print_message(temp, 2);
 	//if (temp->limited_dinner)
 	return (ptr);
 }
@@ -28,7 +28,7 @@ void	start_simulation(t_main *main)
 	main->time_start = get_time();
 	while (i < main->num_of_philos)
 	{
-		printf("start at: %ld\n", get_time() - main->time_start);
+		//printf("start at: %ld\n", get_time() - main->time_start);
 		if (pthread_create(&main->philos[i]->thread, NULL, &routine, main->philos[i]) != 0)
 			error_exit("Failed to create thread\n");
 		i++;

@@ -40,7 +40,7 @@ typedef struct s_main
 	t_philo		**philos;
 	long			time_start;
 	pthread_mutex_t	print;
-	int				num_of_philos;
+	__uint32_t		num_of_philos;
 	__uint32_t		time_to_die;
 	__uint32_t		time_to_eat;
 	__uint32_t		time_to_sleep;
