@@ -1,6 +1,6 @@
 #include "../include/philo.h"
 
-void	hand_out_forks(t_main **main)
+static void	hand_out_forks(t_main **main)
 {
 	__uint32_t	i;
 

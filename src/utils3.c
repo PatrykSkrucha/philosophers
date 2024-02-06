@@ -66,9 +66,7 @@ void	print_message(t_philo *philo, t_activity activity)
 	else if (activity == SLEEP)
 		printf("%ld %lu is sleeping\n", diff, philo->id);
 	else if (activity == THINK)
-	{
 		printf("%ld %ld is thinking\n", diff, philo->id);
-	}
 	else if (activity == FORK)
 		printf("%ld %lu has taken a fork\n", diff, philo->id);
 }

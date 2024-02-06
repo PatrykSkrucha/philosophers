@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 	{
 		printf("Too few arguments\n");
-		exit (1);
+		return (1);
 	}
 	main = arrange_main(++argv);
 	if (main->num_of_philos == 1)
