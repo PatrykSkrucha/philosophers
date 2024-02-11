@@ -11,7 +11,9 @@ void	stop_dinner(t_main *main, t_philo *philo)
 	i = 0;
 	while (i < main->num_of_philos)
 	{
+		pthread_mutex_lock(&main->philos[i]->status_mutex);
 		main->philos[i]->status = DEAD;
+		pthread_mutex_unlock(&main->philos[i]->status_mutex);
 		i++;
 	}
 }

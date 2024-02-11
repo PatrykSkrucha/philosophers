@@ -4,11 +4,13 @@ NAME := philo
 SRC_DIR := src
 OBJ_DIR := obj
 HEAD := ./include/philo.h
-SOURCES := $(SRC_DIR)/*.c 
+SOURCES := $(SRC_DIR)/activities.c $(SRC_DIR)/main.c $(SRC_DIR)/monitoring.c \
+			$(SRC_DIR)/parser.c $(SRC_DIR)/philo_maker.c $(SRC_DIR)/simulation.c \
+			$(SRC_DIR)/split.c $(SRC_DIR)/utils.c $(SRC_DIR)/utils2.c $(SRC_DIR)/utils3.c \
 
 OBJECTS := $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(SOURCES:.c=.o))
 CC := cc
-CFLAGS := -Wall -Wextra -Werror  -pthread #-fsanitize=thread
+CFLAGS := -Wall -Wextra -Werror  -pthread -fsanitize=thread
 
 GREEN = \x1b[32;01m
 RED = \x1b[31;01m
@@ -20,14 +22,14 @@ RM = /bin/rm -f
 all: $(NAME)
 
 $(NAME): $(HEAD) $(OBJ_DIR) $(OBJECTS) $(SOURCES)
-	@$(CC) $(CFLAGS) $(SOURCES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 	@printf "$(GREEN) $(BOLD)======= Created program $(NAME) ======= $(RESET)\n"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(CC) $(HEADERS) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "Compiling... $(notdir $<)\n"
 
 clean:
