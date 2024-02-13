@@ -33,9 +33,9 @@ typedef enum e_activity
 {
 	EAT,
 	SLEEP,
-	THINK,
 	FORK,
-	DEATH
+	DEATH,
+	THINK
 }	t_activity;
 
 typedef struct s_philo
@@ -70,6 +70,11 @@ typedef struct s_main
 }	t_main;
 
 long		get_time(void);
+void		print_eat(void);
+void		print_fork(void);
+void		print_death(void);
+void		print_think(void);
+void		print_sleep(void);
 void		eat(t_philo *philo);
 int			ft_strlen(char	*str);
 int			ft_strlen(char	*str);
@@ -77,8 +82,8 @@ long		ft_atoui32(char *str);
 void		*monitoring(void *ptr);
 void		double_free(char **str);
 void		free_main(t_main *main);
-void		exit_free(t_main **main);
 void		*check_malloc(void *ptr);
+void		exit_free(t_main **main);
 void		error_exit(char *message);
 void		solo_dinner(t_main *main);
 void		print_error(char *message);
@@ -86,8 +91,8 @@ t_status	get_status(t_philo *philo);
 t_main		*arrange_main(char **argv);
 void		philo_sleep(t_philo *philo);
 void		invite_philos(t_main **main);
-char		**ft_split(char *str, char c);
 void		stop_simulation(t_main *main);
+char		**ft_split(char *str, char c);
 void		start_simulation(t_main *main);
 void		update_meal_time(t_philo *philo);
 void		ft_sleep(t_philo *philo, long value);

@@ -12,6 +12,16 @@
 
 #include "../include/philo.h"
 
+//typedef struct print
+//{
+//	void (*print_eat)(t_philo*, long);
+//	void (*print_sleep)(t_philo*, long);
+//	void (*print_fork)(t_philo*, long);
+//	void (*print_death)(t_philo*, long);
+//} 	t_print;
+
+typedef void (*Print)(void);
+
 void	set_mutex(t_main **main)
 {
 	__uint32_t	i;
@@ -67,18 +77,34 @@ t_status	get_status(t_philo *philo)
 void	print_message(t_philo *philo, t_activity activity)
 {
 	long		diff;
+	//Print		jp_tab[4];
 
-	diff = get_time() - philo->main_struct->time_start;
-	if (activity == DEATH)
-		printf("%ld %lu died\n", diff, philo->id);
+	void (*jp_tab[5])(); // Declare an array of function pointers
+
+// Initialize each element of the array with the corresponding function
+	jp_tab[0] = print_eat;
+	jp_tab[1] = print_sleep;
+	jp_tab[2] = print_fork;
+	jp_tab[3] = print_death;
+	jp_tab[4] = print_think;
+	//*jp_tab = {print_eat, print_sleep, print_fork, print_death};
+	//t_print		*print;
+
 	if (get_status(philo) != ALIVE)
 		return ;
-	if (activity == EAT && get_status(philo) == ALIVE)
-		printf("%ld %lu is eating\n", diff, philo->id);
-	else if (activity == SLEEP && get_status(philo) == ALIVE)
-		printf("%ld %lu is sleeping\n", diff, philo->id);
-	else if (activity == THINK && get_status(philo) == ALIVE)
-		printf("%ld %ld is thinking\n", diff, philo->id);
-	else if (activity == FORK && get_status(philo) == ALIVE)
-		printf("%ld %lu has taken a fork\n", diff, philo->id);
+	//print = check_malloc(malloc(sizeof(t_print) * 4));
+	diff = get_time() - philo->main_struct->time_start;
+	printf("%ld %lu ", diff, philo->id);
+	jp_tab[activity]();
+
+	//if (activity == DEATH)
+	//	printf("%ld %lu died\n", diff, philo->id);
+	//if (activity == EAT && get_status(philo) == ALIVE)
+	//	printf("%ld %lu is eating\n", diff, philo->id);
+	//else if (activity == SLEEP && get_status(philo) == ALIVE)
+	//	printf("%ld %lu is sleeping\n", diff, philo->id);
+	//else if (activity == THINK && get_status(philo) == ALIVE)
+	//	printf("%ld %ld is thinking\n", diff, philo->id);
+	//else if (activity == FORK && get_status(philo) == ALIVE)
+	//	printf("%ld %lu has taken a fork\n", diff, philo->id);
 }
