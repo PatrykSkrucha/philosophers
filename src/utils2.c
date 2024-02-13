@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:36 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:51:11 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:42:04 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_main(t_main *main)
 	__uint32_t	i;
 
 	i = 0;
-	printf("num of philos: %ld\n", main->num_of_philos);
 	while (i < main->num_of_philos)
 	{
 		free(main->philos[i]);
@@ -61,7 +60,6 @@ int	ft_strlen(char	*str)
 
 void	exit_free(t_main **main)
 {
-	printf("hereeee\n");
 	free(*main);
 	exit (1);
 }

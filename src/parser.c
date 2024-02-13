@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:08:55 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:48:58 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:36:19 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	limited_meals(char **argv, t_main **main)
 {
 	if (ft_atoui32(argv[0]) > 200)
 	{
-		print_error("Pass number of philos below 200");
+		print_error("Pass number of philos below 200\n");
 		exit_free(main);
 	}
 	if (check_input(argv))
@@ -98,7 +98,13 @@ void	get_input(t_main **main, char **argv)
 	else if (i == 5)
 		limited_meals(argv, main);
 	else
-		error_exit("Incorrect input\n");
+	{
+		print_error("Incorrect input\n");
+		exit_free(main);
+	}
 	if (pthread_mutex_init(&(*main)->print, NULL))
-		error_exit("mutex failure");
+	{
+		print_error("Incorrect input\n");
+		exit_free(main);
+	}
 }

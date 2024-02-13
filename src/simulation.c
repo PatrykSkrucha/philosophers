@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:16 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 14:17:16 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:50:49 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ void	*routine(void *ptr)
 
 	i = 0;
 	philo = ptr;
-	update_meal_time(philo);
 	if (philo->id % 2 != 0)
 	{
-		print_message(philo, THINK);
-		usleep(100);
+		usleep(10000); // sleep 1/4th of time_to_die?
 	}
+	update_meal_time(philo);
 	while (get_status(philo) == ALIVE)
 	{
 		eat(philo);
@@ -41,12 +40,12 @@ void	start_simulation(t_main *main)
 	pthread_t	monitor;
 
 	i = 0;
-	main->time_start = get_time();
 	while (i < main->num_of_philos)
 	{
+		update_meal_time(main->philos[i]);
 		if (pthread_create(&main->philos[i]->thread, NULL,
 				&routine, main->philos[i]) != 0)
-			error_exit("Failed to create thread\n");
+			error_exit("Failed to create thread\n"); //get rid of exit
 		i++;
 	}
 	if (pthread_create(&monitor, NULL, &monitoring, main) != 0)

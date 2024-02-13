@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:08:29 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:08:31 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:50:51 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	solo_dinner(t_main *main)
 {
 	print_message(main->philos[0], FORK);
 	ft_sleep(main->philos[0], main->time_to_die);
-	print_message(main->philos[0], DEATH);
+	printf("%ld 1 died\n", main->time_to_die);
 }

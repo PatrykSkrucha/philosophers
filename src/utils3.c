@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:42 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 14:17:08 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:36:01 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_main	*arrange_main(char **argv)
 	get_input(&main, argv);
 	invite_philos(&main);
 	set_mutex(&main);
+	main->time_start = get_time();
 	return (main);
 }
 
@@ -72,12 +73,12 @@ void	print_message(t_philo *philo, t_activity activity)
 		printf("%ld %lu died\n", diff, philo->id);
 	if (get_status(philo) != ALIVE)
 		return ;
-	if (activity == EAT)
+	if (activity == EAT && get_status(philo) == ALIVE)
 		printf("%ld %lu is eating\n", diff, philo->id);
-	else if (activity == SLEEP)
+	else if (activity == SLEEP && get_status(philo) == ALIVE)
 		printf("%ld %lu is sleeping\n", diff, philo->id);
-	else if (activity == THINK)
+	else if (activity == THINK && get_status(philo) == ALIVE)
 		printf("%ld %ld is thinking\n", diff, philo->id);
-	else if (activity == FORK)
+	else if (activity == FORK && get_status(philo) == ALIVE)
 		printf("%ld %lu has taken a fork\n", diff, philo->id);
 }
