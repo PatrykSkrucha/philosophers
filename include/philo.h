@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 13:10:23 by pskrucha          #+#    #+#             */
+/*   Updated: 2024/02/13 13:43:50 by pskrucha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
-# define  PHILO_H
+# define PHILO_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
@@ -62,13 +74,14 @@ void		eat(t_philo *philo);
 int			ft_strlen(char	*str);
 int			ft_strlen(char	*str);
 long		ft_atoui32(char *str);
-void		think(t_philo *philo);
 void		*monitoring(void *ptr);
 void		double_free(char **str);
 void		free_main(t_main *main);
+void		exit_free(t_main **main);
 void		*check_malloc(void *ptr);
 void		error_exit(char *message);
 void		solo_dinner(t_main *main);
+void		print_error(char *message);
 t_status	get_status(t_philo *philo);
 t_main		*arrange_main(char **argv);
 void		philo_sleep(t_philo *philo);

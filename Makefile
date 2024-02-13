@@ -10,7 +10,7 @@ SOURCES := $(SRC_DIR)/activities.c $(SRC_DIR)/main.c $(SRC_DIR)/monitoring.c \
 
 OBJECTS := $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(SOURCES:.c=.o))
 CC := cc
-CFLAGS := -Wall -Wextra -Werror  -pthread -fsanitize=thread
+CFLAGS := -Wall -Wextra -Werror  -pthread #-fsanitize=address
 
 GREEN = \x1b[32;01m
 RED = \x1b[31;01m
@@ -41,8 +41,5 @@ fclean: clean
 	@printf "$(RED) $(BOLD) Deleting $(NAME)... $(RESET)\n"
 
 re: fclean all
-
-run:
-	make && ./philo $(args)
 
 .PHONY: all clean fclean re
