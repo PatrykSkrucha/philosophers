@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:42 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:34:12 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:17:08 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_main	*arrange_main(char **argv)
 	get_input(&main, argv);
 	invite_philos(&main);
 	set_mutex(&main);
-	main->time_start = get_time();
 	return (main);
 }
 

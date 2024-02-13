@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:16 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:09:18 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:17:16 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	start_simulation(t_main *main)
 	pthread_t	monitor;
 
 	i = 0;
+	main->time_start = get_time();
 	while (i < main->num_of_philos)
 	{
 		if (pthread_create(&main->philos[i]->thread, NULL,
