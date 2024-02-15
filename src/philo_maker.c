@@ -30,7 +30,8 @@ int	hand_out_forks(t_main **main)
 	{
 		if (pthread_mutex_init(&(*main)->philos[i]->r_fork, NULL))
 		{
-			destroy_mutex_status(*main, (*main)->num_of_philos, (*main)->num_of_philos);
+			destroy_mutex_status(*main, (*main)->num_of_philos,
+				(*main)->num_of_philos);
 			destroy_mutex_fork(*main, i);
 			pthread_mutex_destroy(&(*main)->print);
 			return (1);

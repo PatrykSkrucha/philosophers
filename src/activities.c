@@ -71,10 +71,3 @@ void	philo_sleep(t_philo *philo)
 	print_message(philo, SLEEP);
 	ft_sleep(philo, philo->time_to_sleep);
 }
-
-void	solo_dinner(t_main *main)
-{
-	print_message(main->philos[0], FORK);
-	ft_sleep(main->philos[0], main->time_to_die);
-	printf("%ld 1 died\n", main->time_to_die);
-}

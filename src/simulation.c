@@ -21,7 +21,7 @@ void	*routine(void *ptr)
 	philo = ptr;
 	if (philo->id % 2 != 0)
 	{
-		usleep(10000); // sleep 1/4th of time_to_die?
+		usleep((philo->time_to_die / 4) * 1000);
 	}
 	update_meal_time(philo);
 	while (get_status(philo) == ALIVE)
@@ -29,6 +29,7 @@ void	*routine(void *ptr)
 		eat(philo);
 		philo_sleep(philo);
 		print_message(philo, THINK);
+		ft_sleep(philo, philo->time_to_die / 4);
 		i++;
 	}
 	return (NULL);
@@ -44,7 +45,7 @@ void	join_and_free(t_main *main, int i)
 	}
 	destroy_mutex_status(main, main->num_of_philos, main->num_of_philos);
 	pthread_mutex_destroy(&main->print);
-	destroy_mutex_fork(main, --main->num_of_philos);
+	destroy_mutex_fork(main, main->num_of_philos);
 	free_philos(main->num_of_philos, main);
 }
 
@@ -77,3 +78,10 @@ int	start_simulation(t_main *main)
 	return (0);
 }
 
+void	solo_dinner(t_main *main)
+{
+	print_message(main->philos[0], FORK);
+	ft_sleep(main->philos[0], main->time_to_die);
+	printf("%ld 1 died\n", main->time_to_die);
+	free_philos(0, main);
+}

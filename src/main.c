@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_main	*main;
 
-
-	//remove all exit from code!!
 	if (argc < 2)
 	{
 		print_error("Too few arguments\n");
@@ -27,7 +25,10 @@ int	main(int argc, char **argv)
 	if (!main)
 		return (1);
 	if (main->num_of_philos == 1)
+	{
 		solo_dinner(main);
+		return (0);
+	}
 	else
 	{
 		if (start_simulation(main))

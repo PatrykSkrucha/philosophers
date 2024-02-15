@@ -25,22 +25,6 @@ void	*check_malloc(void *ptr)
 	return (ptr);
 }
 
-int	double_free(char **str)
-{
-	int	i;
-
-	if (!str)
-		return (1);
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return (1);
-}
-
 void	update_meal_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->time_mutex);
