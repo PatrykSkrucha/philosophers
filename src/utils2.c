@@ -14,7 +14,7 @@
 
 void	free_main(t_main *main)
 {
-	__uint32_t	i;
+	long	i;
 
 	i = 0;
 	while (i < main->num_of_philos)
@@ -64,7 +64,8 @@ void	exit_free(t_main **main)
 	exit (1);
 }
 
-void	print_error(char *message)
+int	print_error(char *message)
 {
 	write(2, message, ft_strlen(message));
+	return (1);
 }

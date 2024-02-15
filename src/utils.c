@@ -25,12 +25,12 @@ void	*check_malloc(void *ptr)
 	return (ptr);
 }
 
-void	double_free(char **str)
+int	double_free(char **str)
 {
 	int	i;
 
 	if (!str)
-		return ;
+		return (1);
 	i = 0;
 	while (str[i])
 	{
@@ -38,6 +38,7 @@ void	double_free(char **str)
 		i++;
 	}
 	free(str);
+	return (1);
 }
 
 void	update_meal_time(t_philo *philo)

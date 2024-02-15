@@ -34,7 +34,21 @@ void	*routine(void *ptr)
 	return (NULL);
 }
 
-void	start_simulation(t_main *main)
+void	join_and_free(t_main *main, int i)
+{
+	while (i >= 0)
+	{
+		if (pthread_join(main->philos[i]->thread, NULL) != 0)
+			print_error("Error occured during joining thread\n");
+		i--;
+	}
+	destroy_mutex_status(main, main->num_of_philos, main->num_of_philos);
+	pthread_mutex_destroy(&main->print);
+	destroy_mutex_fork(main, --main->num_of_philos);
+	free_philos(main->num_of_philos, main);
+}
+
+int	start_simulation(t_main *main)
 {
 	int			i;
 	pthread_t	monitor;
@@ -45,30 +59,21 @@ void	start_simulation(t_main *main)
 		update_meal_time(main->philos[i]);
 		if (pthread_create(&main->philos[i]->thread, NULL,
 				&routine, main->philos[i]) != 0)
-			error_exit("Failed to create thread\n"); //get rid of exit
+		{
+			print_error(("Failed to create thread\n"));
+			join_and_free(main, i);
+			return (1);
+		}
 		i++;
 	}
 	if (pthread_create(&monitor, NULL, &monitoring, main) != 0)
-		error_exit("Failed to create thread\n");
+	{
+		print_error(("Failed to create thread\n"));
+		join_and_free(main, main->num_of_philos);
+		return (1);
+	}
 	if (pthread_join(monitor, NULL) != 0)
-		error_exit("Failed to create thread\n");
+		print_error("Error occured during joining thread\n");
+	return (0);
 }
 
-void	stop_simulation(t_main *main)
-{
-	long	i;
-
-	i = 0;
-	while (i < main->num_of_philos)
-	{
-		if (pthread_join(main->philos[i]->thread, NULL))
-			error_exit("Failure during joining threads\n");
-		i++;
-	}
-	i = 0;
-	while (i < main->num_of_philos)
-	{
-		pthread_mutex_destroy(&main->philos[i]->r_fork);
-		i++;
-	}
-}

@@ -15,11 +15,14 @@
 void	stop_dinner(t_main *main, t_philo *philo)
 {
 	long	i;
+	long		diff;
 
+	diff = get_time() - philo->main_struct->time_start;
 	pthread_mutex_lock(&philo->status_mutex);
 	philo->status = DEAD;
 	pthread_mutex_unlock(&philo->status_mutex);
-	print_message(philo, DEATH);
+	pthread_mutex_lock(&philo->main_struct->print);
+	printf("%ld %lu died\n", diff,philo->id);
 	i = 0;
 	while (i < main->num_of_philos)
 	{
@@ -28,6 +31,7 @@ void	stop_dinner(t_main *main, t_philo *philo)
 		pthread_mutex_unlock(&main->philos[i]->status_mutex);
 		i++;
 	}
+	pthread_mutex_unlock(&philo->main_struct->print);
 }
 
 void	*monitoring(void *ptr)

@@ -33,58 +33,76 @@ int	check_input(char **argv)
 	return (0);
 }
 
-static void	no_limit_meals(char **argv, t_main **main)
+static int	no_limit_meals(char **argv, t_main **main)
 {
 	(*main)->num_of_philos = ft_atoui32(argv[0]);
 	if (ft_atoui32(argv[0]) > 200)
 	{
 		print_error("Pass number of philos below 200");
-		exit_free(main);
+		return (1);
 	}
 	if (check_input(argv))
-		exit_free(main);
+		return (1);
 	(*main)->time_to_die = ft_atoui32(argv[1]);
 	(*main)->time_to_eat = ft_atoui32(argv[2]);
 	(*main)->time_to_sleep = ft_atoui32(argv[3]);
 	(*main)->limited_dinner = false;
+	return (0);
 }
 
-static void	limited_meals(char **argv, t_main **main)
+static int	limited_meals(char **argv, t_main **main)
 {
 	if (ft_atoui32(argv[0]) > 200)
 	{
-		print_error("Pass number of philos below 200\n");
-		exit_free(main);
+		print_error("Pass number of philos below 200");
+		free(*main);
+		return (1);
 	}
 	if (check_input(argv))
-		exit_free(main);
+	{
+		free(*main);
+		return (1);
+	}
 	(*main)->num_of_philos = ft_atoui32(argv[0]);
 	(*main)->time_to_die = ft_atoui32(argv[1]);
 	(*main)->time_to_eat = ft_atoui32(argv[2]);
 	(*main)->time_to_sleep = ft_atoui32(argv[3]);
 	(*main)->number_of_meals = ft_atoui32(argv[4]);
 	(*main)->limited_dinner = true;
+	return (0);
 }
 
-static void	split_args(char *argv, t_main **main)
+static int	split_args(char *argv, t_main **main)
 {
 	char	**temp_args;
 	int		i;
 
 	i = 0;
-	temp_args = check_malloc(ft_split(argv, ' '));
+	temp_args = ft_split(argv, ' ');
+	if (!temp_args && print_error("Malloc failure\n"))
+		return (1);
 	while (temp_args[i])
 		i++;
 	if (i == 4)
-		no_limit_meals(temp_args, main);
+	{
+		if (no_limit_meals(temp_args, main) && double_free(temp_args))
+			return (1);
+	}
 	else if (i == 5)
-		limited_meals(temp_args, main);
+	{
+		if (limited_meals(temp_args, main) && double_free(temp_args))
+			return (1);
+	}
 	else
-		error_exit("Incorrect input\n");
+	{
+		print_error("Incorrect input\n");
+		return (1);
+	}
 	double_free(temp_args);
+	return (0);
 }
 
-void	get_input(t_main **main, char **argv)
+int	get_input(t_main **main, char **argv)
 {
 	int		i;
 
@@ -92,19 +110,24 @@ void	get_input(t_main **main, char **argv)
 	while (argv[i])
 		i++;
 	if (i == 1)
-		split_args(*argv, main);
+	{
+		if (split_args(*argv, main))
+			return (1);
+	}
 	else if (i == 4)
-		no_limit_meals(argv, main);
+	{
+		if (no_limit_meals(argv, main))
+			return (1);
+	}
 	else if (i == 5)
-		limited_meals(argv, main);
+	{
+		if (limited_meals(argv, main))
+			return (1);
+	}
 	else
 	{
 		print_error("Incorrect input\n");
-		exit_free(main);
+		return (1);
 	}
-	if (pthread_mutex_init(&(*main)->print, NULL))
-	{
-		print_error("Incorrect input\n");
-		exit_free(main);
-	}
+	return (0);
 }

@@ -20,17 +20,19 @@ int	main(int argc, char **argv)
 	//remove all exit from code!!
 	if (argc < 2)
 	{
-		printf("Too few arguments\n");
+		print_error("Too few arguments\n");
 		return (1);
 	}
 	main = arrange_main(++argv);
+	if (!main)
+		return (1);
 	if (main->num_of_philos == 1)
 		solo_dinner(main);
 	else
 	{
-		start_simulation(main);
-		stop_simulation(main);
+		if (start_simulation(main))
+			return (1);
 	}
-	free_main(main);
+	join_and_free(main, --main->num_of_philos);
 	return (0);
 }
