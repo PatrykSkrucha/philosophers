@@ -23,7 +23,6 @@ void	*routine(void *ptr)
 	{
 		usleep((philo->time_to_die / 4) * 1000);
 	}
-	update_meal_time(philo);
 	while (get_status(philo) == ALIVE)
 	{
 		eat(philo);
