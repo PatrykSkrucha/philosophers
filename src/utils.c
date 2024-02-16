@@ -12,19 +12,6 @@
 
 #include "../include/philo.h"
 
-void	error_exit(char *message)
-{
-	write(1, message, ft_strlen(message));
-	exit (1);
-}
-
-void	*check_malloc(void *ptr)
-{
-	if (!ptr)
-		error_exit("Incorrect input\n");
-	return (ptr);
-}
-
 void	update_meal_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->time_mutex);

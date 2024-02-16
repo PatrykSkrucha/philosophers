@@ -60,8 +60,8 @@ void	print_message(t_philo *philo, t_activity activity)
 	long		diff;
 	const char	*type_str[] = {
 	[EAT] = "is eating",
-	[SLEEP] = "is sleeping",
 	[FORK] = "has taken a fork",
+	[SLEEP] = "is sleeping",
 	[THINK] = "is thinking",
 	};
 

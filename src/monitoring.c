@@ -73,7 +73,6 @@ void	*monitoring(void *ptr)
 				return (NULL);
 			i++;
 		}
-		usleep(500);
 	}
 	return (NULL);
 }
