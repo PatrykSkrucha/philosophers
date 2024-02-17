@@ -50,30 +50,31 @@ static int	life_check(t_main *main, int i)
 	return (0);
 }
 
-void	*monitoring(void *ptr)
+void	monitoring(t_main *main)
 {
-	t_main	*main;
 	int		i;
 	int		meal_counter;
 
 	meal_counter = 0;
-	main = ptr;
 	while (1)
 	{
 		i = 0;
 		while (i < main->num_of_philos)
 		{
-			if (get_status(main->philos[i]) == FULLY_ATE)
+			if (main->philos[i]->meal_check
+				&& get_status(main->philos[i]) == FULLY_ATE)
 			{
 				meal_counter++;
-				if (meal_counter == main->number_of_meals)
-					return (NULL);
+				main->philos[i]->meal_check = false;
+			}
+			if (meal_counter == main->num_of_philos)
+			{
+				return ;
 			}
 			if (life_check(main, i))
-				return (NULL);
+				return ;
 			i++;
 		}
 		usleep(50);
 	}
-	return (NULL);
 }

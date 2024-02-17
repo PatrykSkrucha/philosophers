@@ -45,6 +45,7 @@ typedef struct s_philo
 	t_status		status;
 	pthread_mutex_t	r_fork;
 	pthread_mutex_t	*l_fork;
+	bool			meal_check;
 	long			last_eat;
 	pthread_mutex_t	time_mutex;
 	long			time_to_die;
@@ -75,7 +76,7 @@ int			precheck(char **argv);
 int			ft_strlen(char	*str);
 int			ft_strlen(char	*str);
 long		ft_atoui32(char *str);
-void		*monitoring(void *ptr);
+void		monitoring(t_main *main);
 void		free_main(t_main *main);
 int			set_mutex(t_main **main);
 void		exit_free(t_main **main);

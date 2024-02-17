@@ -69,7 +69,8 @@ void	join_and_free_philo_error(t_main *main, int i)
 			print_error("Error occured during joining thread\n");
 		j--;
 	}
-	destroy_mutex_status(main, --main->num_of_philos, main->num_of_philos);
+	main->num_of_philos--;
+	destroy_mutex_status(main, main->num_of_philos, main->num_of_philos);
 	pthread_mutex_destroy(&main->print);
 	destroy_mutex_fork(main, main->num_of_philos);
 	free_philos(main->num_of_philos, main);
@@ -96,7 +97,8 @@ void	join_and_free_monitoring_error(t_main *main)
 			print_error("Error occured during joining thread\n");
 		i++;
 	}
-	destroy_mutex_status(main, --main->num_of_philos, main->num_of_philos);
+	main->num_of_philos--;
+	destroy_mutex_status(main, main->num_of_philos, main->num_of_philos);
 	pthread_mutex_destroy(&main->print);
 	destroy_mutex_fork(main, main->num_of_philos);
 	free_philos(main->num_of_philos, main);
@@ -105,7 +107,6 @@ void	join_and_free_monitoring_error(t_main *main)
 int	start_simulation(t_main *main)
 {
 	int			i;
-	pthread_t	monitor;
 
 	i = 0;
 	while (i < main->num_of_philos)
@@ -120,13 +121,6 @@ int	start_simulation(t_main *main)
 		}
 		i++;
 	}
-	if (pthread_create(&monitor, NULL, &monitoring, main) != 0)
-	{
-		print_error(("Failed to create monitoring thread\n"));
-		join_and_free_monitoring_error(main);
-		return (1);
-	}
-	if (pthread_join(monitor, NULL) != 0)
-		print_error("Error occured during joining thread\n");
+	monitoring(main);
 	return (0);
 }

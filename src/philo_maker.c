@@ -73,9 +73,13 @@ void	pass_data_to_philo(t_main **main, int i)
 	{
 		(*main)->philos[i]->limited_dinner = true;
 		(*main)->philos[i]->number_of_meals = (*main)->number_of_meals;
+		(*main)->philos[i]->meal_check = true;
 	}
 	else
+	{
 		(*main)->philos[i]->limited_dinner = false;
+		(*main)->philos[i]->meal_check = false;
+	}
 }
 
 int	invite_philos(t_main **main)
