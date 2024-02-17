@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:08:38 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:08:41 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/17 16:30:19 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int argc, char **argv)
 		print_error("Too few arguments\n");
 		return (1);
 	}
-	main = arrange_main(++argv);
+	if (precheck(++argv))
+		return (1);
+	main = arrange_main(argv);
 	if (!main)
 		return (1);
 	if (main->num_of_philos == 1)

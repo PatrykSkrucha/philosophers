@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:09:42 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 17:36:01 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/17 16:06:24 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	print_message(t_philo *philo, t_activity activity)
 	[THINK] = "is thinking",
 	};
 
-	diff = get_time() - philo->main_struct->time_start;
 	pthread_mutex_lock(&philo->main_struct->print);
 	if (get_status(philo) != ALIVE)
 	{
 		pthread_mutex_unlock(&philo->main_struct->print);
 		return ;
 	}
+	diff = get_time() - philo->main_struct->time_start;
 	printf("%ld %lu %s\n", diff, philo->id, type_str[activity]);
 	pthread_mutex_unlock(&philo->main_struct->print);
 }

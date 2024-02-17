@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:23 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 13:43:50 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/17 16:24:43 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 # define PHILO_H
 # include <stdio.h>
 # include <stdlib.h>
-# include <pthread.h>
 # include <unistd.h>
 # include <string.h>
-# include <sys/time.h>
 # include <stdbool.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct timeval	t_timeval;
 
 typedef enum e_status
 {
-	ALIVE,
 	DEAD,
+	ALIVE,
 	FULLY_ATE
 }	t_status;
 
@@ -71,6 +71,7 @@ typedef struct s_main
 
 long		get_time(void);
 void		eat(t_philo *philo);
+int			precheck(char **argv);
 int			ft_strlen(char	*str);
 int			ft_strlen(char	*str);
 long		ft_atoui32(char *str);

@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:08:55 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 15:36:19 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:37:29 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_input(char **argv)
 		print_error("Incorrect input\n");
 		return (1);
 	}
-	if (argv[4] && ft_atoui32(argv[4]) < 0)
+	if (argv[4] && ft_atoui32(argv[4]) <= 0)
 	{
 		print_error("Number of meals must be positive number\n");
 		return (1);

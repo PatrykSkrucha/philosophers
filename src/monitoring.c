@@ -6,7 +6,7 @@
 /*   By: pskrucha <pskrucha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:08:46 by pskrucha          #+#    #+#             */
-/*   Updated: 2024/02/13 18:45:11 by pskrucha         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:34:38 by pskrucha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	*monitoring(void *ptr)
 				return (NULL);
 			i++;
 		}
+		usleep(50);
 	}
 	return (NULL);
 }
