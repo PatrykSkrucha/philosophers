@@ -27,7 +27,7 @@ void	free_main(t_main *main)
 	free(main);
 }
 
-long	ft_atoui32(char *str)
+long	ft_atol(char *str)
 {
 	long	number;
 

@@ -50,7 +50,7 @@ static int	life_check(t_main *main, int i)
 	return (0);
 }
 
-void	monitoring(t_main *main)
+int	monitoring(t_main *main)
 {
 	int		i;
 	int		meal_counter;
@@ -68,13 +68,12 @@ void	monitoring(t_main *main)
 				main->philos[i]->meal_check = false;
 			}
 			if (meal_counter == main->num_of_philos)
-			{
-				return ;
-			}
+				return (0);
 			if (life_check(main, i))
-				return ;
+				return (1);
 			i++;
 		}
 		usleep(50);
 	}
+	return (0);
 }

@@ -15,10 +15,13 @@
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
-	int		i;
 
-	i = 0;
 	philo = ptr;
+	if (philo->main_struct->num_of_philos == 1)
+	{
+		solo_dinner(philo);
+		return (NULL);
+	}
 	if (philo->id % 2 != 0)
 	{
 		usleep((philo->time_to_die / 4) * 1000);
@@ -29,24 +32,27 @@ void	*routine(void *ptr)
 		philo_sleep(philo);
 		print_message(philo, THINK);
 		if (philo->main_struct->num_of_philos % 2)
-			ft_sleep(philo, (philo->time_to_eat / 4));
-		i++;
+			ft_sleep(philo, (philo->time_to_die / 4));
 	}
 	return (NULL);
 }
 
 void	join_and_free(t_main *main, int i)
 {
+	int	phil_num;
+
+	i--;
+	phil_num = i;
 	while (i >= 0)
 	{
 		if (pthread_join(main->philos[i]->thread, NULL) != 0)
 			print_error("Error occured during joining thread\n");
 		i--;
 	}
-	destroy_mutex_status(main, main->num_of_philos, main->num_of_philos);
+	destroy_mutex_status(main, phil_num, phil_num);
 	pthread_mutex_destroy(&main->print);
-	destroy_mutex_fork(main, main->num_of_philos);
-	free_philos(main->num_of_philos, main);
+	destroy_mutex_fork(main, phil_num);
+	free_philos(phil_num, main);
 }
 
 void	join_and_free_philo_error(t_main *main, int i)
@@ -121,6 +127,10 @@ int	start_simulation(t_main *main)
 		}
 		i++;
 	}
-	monitoring(main);
+	if (main->num_of_philos > 1 && monitoring(main))
+	{
+		join_and_free(main, main->num_of_philos);
+		return (1);
+	}
 	return (0);
 }

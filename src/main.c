@@ -26,16 +26,8 @@ int	main(int argc, char **argv)
 	main = arrange_main(argv);
 	if (!main)
 		return (1);
-	if (main->num_of_philos == 1)
-	{
-		solo_dinner(main);
-		return (0);
-	}
-	else
-	{
-		if (start_simulation(main))
-			return (1);
-	}
-	join_and_free(main, --main->num_of_philos);
+	if (start_simulation(main))
+		return (1);
+	join_and_free(main, main->num_of_philos);
 	return (0);
 }

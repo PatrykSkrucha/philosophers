@@ -15,7 +15,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
@@ -45,8 +44,8 @@ typedef struct s_philo
 	t_status		status;
 	pthread_mutex_t	r_fork;
 	pthread_mutex_t	*l_fork;
-	bool			meal_check;
 	long			last_eat;
+	bool			meal_check;
 	pthread_mutex_t	time_mutex;
 	long			time_to_die;
 	long			time_to_eat;
@@ -71,18 +70,18 @@ typedef struct s_main
 }	t_main;
 
 long		get_time(void);
+long		ft_atol(char *str);
 void		eat(t_philo *philo);
 int			precheck(char **argv);
 int			ft_strlen(char	*str);
 int			ft_strlen(char	*str);
-long		ft_atoui32(char *str);
-void		monitoring(t_main *main);
+int			monitoring(t_main *main);
 void		free_main(t_main *main);
 int			set_mutex(t_main **main);
 void		exit_free(t_main **main);
-void		solo_dinner(t_main *main);
 int			print_error(char *message);
 t_status	get_status(t_philo *philo);
+void		solo_dinner(t_philo *main);
 t_main		*arrange_main(char **argv);
 void		philo_sleep(t_philo *philo);
 int			invite_philos(t_main **main);

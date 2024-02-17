@@ -72,10 +72,12 @@ void	philo_sleep(t_philo *philo)
 	ft_sleep(philo, philo->time_to_sleep);
 }
 
-void	solo_dinner(t_main *main)
+void	solo_dinner(t_philo *philo)
 {
-	print_message(main->philos[0], FORK);
-	ft_sleep(main->philos[0], main->time_to_die);
-	printf("%ld 1 died\n", main->time_to_die);
-	free_philos(0, main);
+	long	diff;
+
+	print_message(philo, FORK);
+	ft_sleep(philo, philo->time_to_die);
+	diff = get_time() - philo->main_struct->time_start;
+	printf("%ld 1 died\n", diff);
 }
